@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "382263019635",
+    "firebase_url": "https://i-want-too.firebaseio.com",
+    "project_id": "i-want-too",
+    "storage_bucket": "i-want-too.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382263019635:android:91f66b4ceacfc3aad18206",
+        "android_client_info": {
+          "package_name": "app.aoyagi.makkan.iwamtproduct"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382263019635-pobg6b0gjehl7vc6oakem7sjtunj9gjv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByjW0ilJmqTqgkiVjbTnGrnTNuQZD-3Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382263019635-pobg6b0gjehl7vc6oakem7sjtunj9gjv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
