@@ -1,5 +1,6 @@
 package app.aoyagi.makkan.iwamtproduct
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,8 +15,7 @@ class EditIdeaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_idea)
 
         fab.setOnClickListener {
-            val database = FirebaseDatabase.getInstance()
-            val idea = database.getReference("idea")
+            val database = FirebaseFirestore.getInstance()
 
             val idea_list = hashMapOf(
                 "title" to titleText.text.toString(),
@@ -23,8 +23,18 @@ class EditIdeaActivity : AppCompatActivity() {
                 "pourpose" to pourpose.text.toString()
 
             )
-            idea.setValue(idea_list)
+            database.collection("users")
+                .add(idea_list)
+                .addOnSuccessListener { documentReference ->
+                    Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error adding document", e)
+                }
 
+            var intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
 
         }
     }
