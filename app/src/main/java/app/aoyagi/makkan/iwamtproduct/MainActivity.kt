@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
-        var adapter = MyAdapter(this,5)
+
+        var adapter = MyAdapter(this, 5)
 
         list.adapter = adapter
     }

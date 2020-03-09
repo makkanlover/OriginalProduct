@@ -13,13 +13,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class MyAdapter(
     private val context: Context,
-    private var size :Int
+    private var size: Int
 
 ) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     val database = FirebaseFirestore.getInstance()
-
-
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,12 +24,12 @@ class MyAdapter(
         return ViewHolder(v)
     }
 
-    override fun getItemCount(): Int  = database.hashCode()
+    override fun getItemCount(): Int = database.hashCode()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.titleText.text = database.collection("users").document("title") .toString()
-        holder.contentText.text = database.collection("users").document("contents") .toString()
-        holder.pourposeText.text = database.collection("users").document("pourpose") .toString()
+        holder.titleText.text = database.collection("users").document("title").toString()
+        holder.contentText.text = database.collection("users").document("contents").toString()
+        holder.pourposeText.text = database.collection("users").document("pourpose").toString()
 
 
     }
