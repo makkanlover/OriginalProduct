@@ -20,6 +20,8 @@ class MyAdapter(
 
 
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.view_expression, parent, false)
         return ViewHolder(v)
@@ -42,6 +44,7 @@ class MyAdapter(
     }
 
     fun getFirebaseData() {
+
         database.collection("users")
             .get()
             .addOnSuccessListener { result ->
