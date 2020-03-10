@@ -17,7 +17,6 @@ class EditIdeaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_idea)
 
-
         fab.setOnClickListener {
 
             val idea_list = hashMapOf(
@@ -34,23 +33,30 @@ class EditIdeaActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Log.w("TAG", "Error adding document", e)
                 }
-            val source = Source.CACHE
 
-            val ideadata = database.collection("users")
-            ideadata.get(source).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val document = task.result
-                    Log.d("DAdafadsa", document.toString())
-
+            val list =  database.collection("users")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d("asdfghjkl", "${document.id} => ${document.data}")
+                    }
                 }
-            }
+                .addOnFailureListener { exception ->
+                    Log.w("TAG", "Error getting documents.", exception)
+                }
+            val list_title = databaseList()
+            Log.d("qwertyuio", list_title.toString())
 
 
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-
-
         }
+
+
+
+
+
     }
 }
+

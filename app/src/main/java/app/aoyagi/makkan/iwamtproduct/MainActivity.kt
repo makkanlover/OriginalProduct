@@ -1,5 +1,6 @@
 package app.aoyagi.makkan.iwamtproduct
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,11 @@ class MainActivity : AppCompatActivity() {
         var adapter = MyAdapter(this, 5)
 
         list.adapter = adapter
+        fab2.setOnClickListener {
+            val intent = Intent(this, EditIdeaActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 }
