@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.activity_edit_idea.*
 
 class EditIdeaActivity : AppCompatActivity() {
     val database = FirebaseFirestore.getInstance()
+    var dataList : ArrayList<Any>? = null
+    lateinit var queryDocument :QueryDocumentSnapshot
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,17 +29,9 @@ class EditIdeaActivity : AppCompatActivity() {
                 "pourpose" to pourpose.text.toString()
 
             )
-            database.collection("users")
-                .add(idea_list)
-                .addOnSuccessListener { documentReference ->
-                    Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w("TAG", "Error adding document", e)
-                }
 
 
-            val list_title = database.collection("users").get().result!!.metadata
+            getData()
 
 
 
@@ -56,6 +52,11 @@ class EditIdeaActivity : AppCompatActivity() {
                 for (document in result) {
                     //document.dataで中のデータが取ってこれた。
                     Log.d("asdfghjkl", "${document.id} => ${document.data}")
+                    queryDocument = document
+                    val item_data = queryDocument.data
+                    dataList?.add(item_data)
+                    //グローバル変数に入れて出力することで、汎用性を確保
+                    Log.d("listresult", item_data.toString())
                 }
             }
             .addOnFailureListener { exception ->
