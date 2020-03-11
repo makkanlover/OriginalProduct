@@ -65,10 +65,10 @@ class EditIdeaActivity : AppCompatActivity() {
                     queryDocument = document
                     val item_data = queryDocument.data
                     map = item_data as HashMap<String, String>
-                    map_title_list.add(map["title"].toString())
-                    map_content_list.add(map["contents"].toString())
-                    map_pourpose_list.add(map["pourpose"].toString())
-                    Log.d("123", map_title_list.toString())
+//                    map_title_list.add(map["title"].toString())
+//                    map_content_list.add(map["contents"].toString())
+//                    map_pourpose_list.add(map["pourpose"].toString())
+//                    Log.d("123", map_title_list.toString())
                     ideaData_list.add(
                         IdeaData(
                             map["title"].toString(),
