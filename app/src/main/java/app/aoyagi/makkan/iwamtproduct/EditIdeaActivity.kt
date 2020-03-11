@@ -1,20 +1,21 @@
 package app.aoyagi.makkan.iwamtproduct
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.google.firebase.database.FirebaseDatabase
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.activity_edit_idea.*
 
 class EditIdeaActivity : AppCompatActivity() {
     val database = FirebaseFirestore.getInstance()
-    var dataList : ArrayList<Any>? = null
-    lateinit var queryDocument :QueryDocumentSnapshot
+    private val ideaData_list: ArrayList<IdeaData> = arrayListOf()
+    lateinit var map: HashMap<String, String>
+    lateinit var queryDocument: QueryDocumentSnapshot
+    private var map_title_list: ArrayList<String> = ArrayList()
+    private var map_content_list: ArrayList<String> = ArrayList()
+    private var map_pourpose_list: ArrayList<String> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,48 +23,66 @@ class EditIdeaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_idea)
 
         fab.setOnClickListener {
-
-            val idea_list = hashMapOf(
-                "title" to titleText.text.toString(),
-                "content" to content.text.toString(),
-                "pourpose" to pourpose.text.toString()
-
-            )
-
-
+            sendData()
             getData()
-
-
-
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
 
-
-
-
+    override fun onDestroy() {
+        super.onDestroy()
 
     }
-    fun getData(){
+
+    fun sendData() {
+        val idea_list = hashMapOf(
+            "title" to titleText.text.toString(),
+            "content" to content.text.toString(),
+            "pourpose" to pourpose.text.toString()
+
+        )
+
+        database.collection("users")
+            .add(idea_list)
+            .addOnSuccessListener { documentReference ->
+//                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+//                Log.w("TAG", "Error adding document", e)
+            }
+    }
+
+
+    fun getData() {
         database.collection("users")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     //document.dataで中のデータが取ってこれた。
-                    Log.d("asdfghjkl", "${document.id} => ${document.data}")
+//                    Log.d("asdfghjkl", "${document.id} => ${document.data}")
                     queryDocument = document
                     val item_data = queryDocument.data
-                    dataList?.add(item_data)
-                    //グローバル変数に入れて出力することで、汎用性を確保
-                    Log.d("listresult", item_data.toString())
+                    map = item_data as HashMap<String, String>
+                    map_title_list.add(map["title"].toString())
+                    map_content_list.add(map["contents"].toString())
+                    map_pourpose_list.add(map["pourpose"].toString())
+                    Log.d("123", map_title_list.toString())
+                    ideaData_list.add(
+                        IdeaData(
+                            map["title"].toString(),
+                            map["content"].toString(),
+                            map["pourpose"].toString()
+                        )
+                    )
+
                 }
             }
             .addOnFailureListener { exception ->
                 Log.w("TAG", "Error getting documents.", exception)
             }
-        return
-
     }
+
 }
 
