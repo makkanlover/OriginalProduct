@@ -9,10 +9,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 import kotlinx.android.synthetic.main.activity_edit_idea.*
 
 class EditIdeaActivity : AppCompatActivity() {
-    val database = FirebaseFirestore.getInstance()
+    private val database = FirebaseFirestore.getInstance()
     private val ideaData_list: ArrayList<IdeaData> = arrayListOf()
     lateinit var map: HashMap<String, String>
-    lateinit var queryDocument: QueryDocumentSnapshot
+    private lateinit var queryDocument: QueryDocumentSnapshot
     private var map_title_list: ArrayList<String> = ArrayList()
     private var map_content_list: ArrayList<String> = ArrayList()
     private var map_pourpose_list: ArrayList<String> = ArrayList()
@@ -25,7 +25,7 @@ class EditIdeaActivity : AppCompatActivity() {
         fab.setOnClickListener {
             sendData()
             getData()
-            var intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

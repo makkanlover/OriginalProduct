@@ -6,54 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 
 class MyAdapter(
-    private val context: Context,
-    private var size: Int
+    context: Context,
+    layoutResourceId: Int,
+    objects: List<IdeaData>
+) : ArrayAdapter<IdeaData>(context,layoutResourceId,objects) {
+    var mIdeaDatas: List<IdeaData> = objects
 
-) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
-    val database = FirebaseFirestore.getInstance()
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(context).inflate(R.layout.view_expression, parent, false)
-        return ViewHolder(v)
+    override fun getCount(): Int {
+        return mIdeaDatas.size
     }
 
-    override fun getItemCount(): Int = database.hashCode()
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.titleText.text = database.collection("users").document("title").toString()
-        holder.contentText.text = database.collection("users").document("contents").toString()
-        holder.pourposeText.text = database.collection("users").document("pourpose").toString()
-
-
-    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.expression_title)
         val contentText: TextView = view.findViewById(R.id.expression_contents)
         val pourposeText: TextView = view.findViewById(R.id.expression_pourpose)
-    }
-
-    fun getFirebaseData() {
-
-        database.collection("users")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d("TAG", "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("TAG", "Error getting documents.", exception)
-            }
-
-
+//        val heartText :TextView = view.findViewById()
     }
 
 }
