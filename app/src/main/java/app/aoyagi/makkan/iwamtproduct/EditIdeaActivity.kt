@@ -13,9 +13,9 @@ class EditIdeaActivity : AppCompatActivity() {
     private val ideaData_list: ArrayList<IdeaData> = arrayListOf()
     lateinit var map: HashMap<String, String>
     private lateinit var queryDocument: QueryDocumentSnapshot
-    private var map_title_list: ArrayList<String> = ArrayList()
-    private var map_content_list: ArrayList<String> = ArrayList()
-    private var map_pourpose_list: ArrayList<String> = ArrayList()
+//    private var map_title_list: ArrayList<String> = ArrayList()
+//    private var map_content_list: ArrayList<String> = ArrayList()
+//    private var map_pourpose_list: ArrayList<String> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class EditIdeaActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             sendData()
-            getData()
+//            getData()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -76,7 +76,7 @@ class EditIdeaActivity : AppCompatActivity() {
                             map["pourpose"].toString()
                         )
                     )
-
+                    Log.d("1234567u", map["title"].toString())
                 }
             }
             .addOnFailureListener { exception ->
