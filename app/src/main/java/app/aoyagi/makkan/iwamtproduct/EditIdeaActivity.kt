@@ -13,9 +13,7 @@ class EditIdeaActivity : AppCompatActivity() {
     private val ideaData_list: ArrayList<IdeaData> = arrayListOf()
     lateinit var map: HashMap<String, String>
     private lateinit var queryDocument: QueryDocumentSnapshot
-//    private var map_title_list: ArrayList<String> = ArrayList()
-//    private var map_content_list: ArrayList<String> = ArrayList()
-//    private var map_pourpose_list: ArrayList<String> = ArrayList()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +45,8 @@ class EditIdeaActivity : AppCompatActivity() {
         database.collection("users")
             .add(idea_list)
             .addOnSuccessListener { documentReference ->
-//                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-//                Log.w("TAG", "Error adding document", e)
             }
     }
 
@@ -60,15 +56,9 @@ class EditIdeaActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    //document.dataで中のデータが取ってこれた。
-//                    Log.d("asdfghjkl", "${document.id} => ${document.data}")
                     queryDocument = document
                     val item_data = queryDocument.data
                     map = item_data as HashMap<String, String>
-//                    map_title_list.add(map["title"].toString())
-//                    map_content_list.add(map["contents"].toString())
-//                    map_pourpose_list.add(map["pourpose"].toString())
-//                    Log.d("123", map_title_list.toString())
                     ideaData_list.add(
                         IdeaData(
                             map["title"].toString(),
