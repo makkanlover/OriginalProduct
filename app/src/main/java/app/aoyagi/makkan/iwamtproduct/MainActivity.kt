@@ -5,38 +5,35 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
     private val database = FirebaseFirestore.getInstance()
-    private var ideaDatas: ArrayList<IdeaData> = ArrayList()
-    lateinit var map: HashMap<String, String>
-    private lateinit var queryDocument: QueryDocumentSnapshot
-    private var ideaDatasAdapter: MyAdapter? = null
+    private val ideaDatas: ArrayList<IdeaData> = ArrayList()
+    private lateinit var ideaDataAdapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ideaDataAdapter = MyAdapter(this, R.layout.view_expression)
+        list.adapter = ideaDataAdapter
         getData()
-        ideaDatasAdapter = MyAdapter(this, R.layout.view_expression, ideaDatas)
-        list.adapter = ideaDatasAdapter
-        intent_editActivity.setOnClickListener {
+        intentEditActivity.setOnClickListener {
             val intent = Intent(this, EditIdeaActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
 
-    fun getData() {
+    private fun getData() {
         database.collection("users")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    queryDocument = document
-                    val item_data = queryDocument.data
-                    map = item_data as HashMap<String, String>
+                    val queryDocument = document
+                    val itemData = queryDocument.data
+                    val map = itemData as HashMap<String, String>
                     ideaDatas.add(
                         IdeaData(
                             title_text = map["title"].toString(),
@@ -45,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 }
-                ideaDatasAdapter!!.addAll(ideaDatas)
+                ideaDataAdapter.addAll(ideaDatas)
             }
             .addOnFailureListener { exception ->
                 Log.w("TAG", "Error getting documents.", exception)

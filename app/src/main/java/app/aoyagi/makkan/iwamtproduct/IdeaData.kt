@@ -1,6 +1,6 @@
 package app.aoyagi.makkan.iwamtproduct
 
-class IdeaData(
+data class IdeaData(
     var title_text: String,
     var content_text: String,
     var pourpose_text: String,

@@ -11,24 +11,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 
-class MyAdapter(context: Context, layoutResourceId: Int, objects: List<IdeaData>) :
-    ArrayAdapter<IdeaData>(context, layoutResourceId, objects) {
-    var mIdeaDatas: List<IdeaData> = objects
+class MyAdapter(context: Context, layoutResourceId: Int) :
+    ArrayAdapter<IdeaData>(context, layoutResourceId) {
+    private val inflater = LayoutInflater.from(context)
 
-
-    override fun getCount(): Int {
-        return mIdeaDatas.size / 2
-    }
-
-    override fun getItem(position: Int): IdeaData? {
-        return mIdeaDatas[position]
-    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val (viewHolder, convertView) = if (convertView == null) {
-            val inflater = LayoutInflater.from(context)
+        var (viewHolder, convertView) = if (convertView == null) {
             val convertView = inflater.inflate(R.layout.view_expression, null)
             val viewHolder = ViewHolder(convertView)
+
 
             convertView.tag = viewHolder
             Pair(viewHolder, convertView)
@@ -39,16 +31,14 @@ class MyAdapter(context: Context, layoutResourceId: Int, objects: List<IdeaData>
         val item: IdeaData? = getItem(position)
 
         if (item != null) {
-            (viewHolder as ViewHolder).titleText.text = item.title_text
+            val viewHolder: ViewHolder = viewHolder as ViewHolder
+            viewHolder.titleText.text = item.title_text
             viewHolder.heartCountText.text = (item.heart_count.toString())
-            (viewHolder as ViewHolder).heartImage.setOnClickListener {
+            viewHolder.heartImage.setOnClickListener {
                 item.heart_count++
                 viewHolder.heartCountText.text = (item.heart_count.toString())
             }
-//            (viewHolder as ViewHolder).commentImage.setOnClickListener {
-//                item.comment_count++
             viewHolder.commentCountText.text = (item.comment_count.toString())
-//            }
         }
         return convertView
     }
