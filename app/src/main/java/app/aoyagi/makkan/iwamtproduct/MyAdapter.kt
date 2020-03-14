@@ -14,6 +14,7 @@ import java.util.*
 class MyAdapter(context: Context, layoutResourceId: Int) :
     ArrayAdapter<IdeaData>(context, layoutResourceId) {
     private val inflater = LayoutInflater.from(context)
+    private val database = FirebaseFirestore.getInstance()
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -34,9 +35,19 @@ class MyAdapter(context: Context, layoutResourceId: Int) :
             val viewHolder: ViewHolder = viewHolder as ViewHolder
             viewHolder.titleText.text = item.title_text
             viewHolder.heartCountText.text = (item.heart_count.toString())
+            var heartInt= item.heart_count.toInt()
             viewHolder.heartImage.setOnClickListener {
-                item.heart_count++
-                viewHolder.heartCountText.text = (item.heart_count.toString())
+                heartInt++
+                val heartCount: Map<String, Any> = hashMapOf(
+                    "heartcount" to heartInt
+                )
+                database.collection("users").document(item.document_path)
+                    .update(heartCount)
+                    .addOnSuccessListener { documentReference ->
+                    }
+                    .addOnFailureListener { e ->
+                    }
+                viewHolder.heartCountText.text = (heartInt.toString())
             }
             viewHolder.commentCountText.text = (item.comment_count.toString())
         }

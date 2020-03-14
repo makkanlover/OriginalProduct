@@ -38,10 +38,14 @@ class MainActivity : AppCompatActivity() {
                         IdeaData(
                             title_text = map["title"].toString(),
                             content_text = map["content"].toString(),
-                            pourpose_text = map["pourpose"].toString()
+                            pourpose_text = map["pourpose"].toString(),
+                            heart_count = map["heartcount"].toString(),
+                            document_path = queryDocument.id
                         )
                     )
+
                 }
+
                 ideaDataAdapter.addAll(ideaDatas)
             }
             .addOnFailureListener { exception ->
