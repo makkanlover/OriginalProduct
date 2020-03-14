@@ -17,7 +17,7 @@ class MyAdapter(context: Context, layoutResourceId: Int, objects: List<IdeaData>
 
 
     override fun getCount(): Int {
-        return mIdeaDatas.size
+        return mIdeaDatas.size / 2
     }
 
     override fun getItem(position: Int): IdeaData? {
@@ -40,6 +40,7 @@ class MyAdapter(context: Context, layoutResourceId: Int, objects: List<IdeaData>
 
         if (item != null) {
             (viewHolder as ViewHolder).titleText.text = item.title_text
+            viewHolder.heartCountText.text = (item.heart_count.toString())
             (viewHolder as ViewHolder).heartImage.setOnClickListener {
                 item.heart_count++
                 viewHolder.heartCountText.text = (item.heart_count.toString())
