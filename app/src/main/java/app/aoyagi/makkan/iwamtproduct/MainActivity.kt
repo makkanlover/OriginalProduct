@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         ideaDataAdapter = MyAdapter(this, R.layout.view_expression)
         list.adapter = ideaDataAdapter
         getData()
-        intentEditActivity.setOnClickListener {
+        intent_button.setOnClickListener {
             val intent = Intent(this, EditIdeaActivity::class.java)
             startActivity(intent)
             finish()
