@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val database = FirebaseFirestore.getInstance()
-    private var mIdeaDatas: ArrayList<IdeaData> = arrayListOf()
+    private var mIdeaDatas: ArrayList<IdeaData> = ArrayList()
     lateinit var map: HashMap<String, String>
     private lateinit var queryDocument: QueryDocumentSnapshot
 //    private var map_title_list: ArrayList<String> = ArrayList()
