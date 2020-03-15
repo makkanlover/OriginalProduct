@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
     private val database = FirebaseFirestore.getInstance()
     private val ideaDatas: ArrayList<IdeaData> = ArrayList()
     private lateinit var ideaDataAdapter: MyAdapter
@@ -16,7 +16,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ideaDataAdapter = MyAdapter(this, R.layout.view_expression)
+        ideaDataAdapter = MyAdapter(this, R.layout.view_expression,object : MyAdapter.OnItemClickListener{
+            override fun onItemClick(item :Int,id:String){
+                val heartCount: Map<String, Any> = hashMapOf(
+                    "heartcount" to item
+                )
+                database.collection("users").document(id)
+                .update(heartCount)
+                    .addOnSuccessListener { documentReference ->
+                    }
+                    .addOnFailureListener { e ->
+                    }
+            }
+        })
         list.adapter = ideaDataAdapter
         getData()
         intent_button.setOnClickListener {
@@ -24,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
     }
 
     private fun getData() {
@@ -52,6 +65,12 @@ class MainActivity : AppCompatActivity() {
                 Log.w("TAG", "Error getting documents.", exception)
             }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
 
 
 }
