@@ -64,7 +64,7 @@
         android:ems="10"
         android:gravity="top"
         android:hint=" contents"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:paddingStart="8dp"
         android:paddingTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/pourposeView"

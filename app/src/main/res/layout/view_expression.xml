@@ -20,32 +20,47 @@
             android:id="@+id/titleText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="空飛ぶ車"
             android:textColor="#DEFF8932"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/heart_image"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_favorite_white_87_24dp" />
-
-        <TextView
-            android:id="@+id/heart_count_text"
+        <LinearLayout
+            android:id="@+id/heartLinear"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:gravity="start|center_vertical"
-            android:text="@string/string_xml"
-            android:textColor="#DEFFFFFF"
-            android:textSize="12sp" />
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/heart_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical|end"
+                android:text="@string/string_xml"
+                android:textColor="#DEFFFFFF"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/heart_image"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_favorite_white_87_24dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -57,17 +72,20 @@
         android:paddingBottom="8dp">
 
         <LinearLayout
+            android:id="@+id/commentLinear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <ImageView
                 android:id="@+id/comment_image"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_mode_comment_white_38_24dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mode_comment_white_20dp" />
 
             <TextView
                 android:id="@+id/comment_count_text"
@@ -75,8 +93,10 @@
                 android:layout_height="24dp"
                 android:layout_gravity="start|center_vertical"
                 android:layout_marginStart="8dp"
+                android:gravity="center"
                 android:text="@string/string_xml"
-                android:textColor="#99FFFFFF" />
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <ImageView
@@ -84,14 +104,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_pan_tool_white_38_24dp" />
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:src="@drawable/ic_pan_tool_black_24dp" />
 
         <ImageView
             android:id="@+id/shareImage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_share_white_38_24dp" />
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:src="@drawable/ic_share_white_20dp" />
 
     </LinearLayout>
 

@@ -28,6 +28,13 @@ class MainActivity() : AppCompatActivity() {
                     .addOnFailureListener { e ->
                     }
             }
+
+            override fun onClick(item :IdeaData) {
+                val intent = Intent(this@MainActivity, CommentActivity::class.java)
+                intent.putExtra("id",item.document_path)
+                startActivity(intent)
+                finish()
+            }
         })
         list.adapter = ideaDataAdapter
         getData()
