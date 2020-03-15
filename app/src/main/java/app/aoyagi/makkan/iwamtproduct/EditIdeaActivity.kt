@@ -28,21 +28,23 @@ class EditIdeaActivity : AppCompatActivity() {
     }
 
     fun sendData() {
-        val ideaList = hashMapOf(
-            "title" to titleText.text.toString(),
+        if (titleText.text.toString() != "" &&  content.text.toString() != "" && pourpose.text.toString() != ""){
+            val ideaList = hashMapOf(
+                    "title" to titleText.text.toString(),
             "content" to content.text.toString(),
             "pourpose" to pourpose.text.toString(),
             "heartcount" to "0",
             "timestamp" to FieldValue.serverTimestamp()
 
-        )
+            )
 
-        database.collection("users")
-            .add(ideaList)
-            .addOnSuccessListener { documentReference ->
-            }
-            .addOnFailureListener { e ->
-            }
+            database.collection("users")
+                .add(ideaList)
+                .addOnSuccessListener { documentReference ->
+                }
+                .addOnFailureListener { e ->
+                }
+        }
     }
 
 
