@@ -2,11 +2,9 @@ package app.aoyagi.makkan.iwamtproduct
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import kotlinx.android.synthetic.main.activity_edit_idea.*
 
 class EditIdeaActivity : AppCompatActivity() {
@@ -16,7 +14,7 @@ class EditIdeaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_idea)
 
-        fab.setOnClickListener {
+        createButton.setOnClickListener {
             sendData()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
