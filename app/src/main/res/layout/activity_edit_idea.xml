@@ -7,7 +7,7 @@
     tools:context=".EditIdeaActivity">
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@+id/pourpose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     <EditText
         android:id="@+id/pourpose"
