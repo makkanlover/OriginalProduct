@@ -31,7 +31,7 @@ class MainActivity() : AppCompatActivity() {
         })
         list.adapter = ideaDataAdapter
         getData()
-        intent_button.setOnClickListener {
+        intentButton.setOnClickListener {
             val intent = Intent(this, EditIdeaActivity::class.java)
             startActivity(intent)
             finish()
