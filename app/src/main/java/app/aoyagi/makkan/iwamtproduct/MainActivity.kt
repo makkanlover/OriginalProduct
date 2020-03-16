@@ -16,6 +16,8 @@ class MainActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         ideaDataAdapter = MyAdapter(this, R.layout.view_expression,object : MyAdapter.OnItemClickListener{
             override fun onItemClick(item :Int,id:String){
                 val heartCount: Map<String, Any> = hashMapOf(

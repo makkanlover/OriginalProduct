@@ -15,6 +15,8 @@ class CommentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val documentId = intent.getStringExtra("id")
         val document = database.collection("users").document(documentId)
         document.get()
@@ -29,6 +31,13 @@ class CommentActivity : AppCompatActivity() {
                 } else {
                 }
             }
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
 
     }
 }
