@@ -16,6 +16,8 @@ class MainActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         ideaDataAdapter = MyAdapter(this, R.layout.view_expression,object : MyAdapter.OnItemClickListener{
             override fun onItemClick(item :Int,id:String){
                 val heartCount: Map<String, Any> = hashMapOf(
@@ -27,6 +29,13 @@ class MainActivity() : AppCompatActivity() {
                     }
                     .addOnFailureListener { e ->
                     }
+            }
+
+            override fun onClick(item :IdeaData) {
+                val intent = Intent(this@MainActivity, CommentActivity::class.java)
+                intent.putExtra("id",item.document_path)
+                startActivity(intent)
+                finish()
             }
         })
         list.adapter = ideaDataAdapter

@@ -35,14 +35,20 @@ class MyAdapter(context: Context, layoutResourceId: Int, private var listener: O
         if (item != null) {
             val viewHolder: ViewHolder = viewHolder as ViewHolder
             viewHolder.titleText.text = item.title_text
+            viewHolder.titleText.setOnClickListener {
+                listener.onClick(item)
+            }
             viewHolder.heartCountText.text = (item.heart_count.toString())
             var heartInt= item.heart_count.toInt()
-            viewHolder.heartImage.setOnClickListener {
+            viewHolder.heartLinear.setOnClickListener {
                 heartInt++
                 listener.onItemClick(heartInt,item.document_path)
                 viewHolder.heartCountText.text = (heartInt.toString())
             }
             viewHolder.commentCountText.text = (item.comment_count.toString())
+            viewHolder.commentLinear.setOnClickListener {
+
+            }
         }
         return convertView
     }
@@ -52,12 +58,14 @@ class MyAdapter(context: Context, layoutResourceId: Int, private var listener: O
         val titleText: TextView = view.findViewById(R.id.titleText)
         val commentCountText: TextView = view.findViewById(R.id.comment_count_text)
         val heartCountText: TextView = view.findViewById(R.id.heart_count_text)
-        val commentImage: ImageView = view.findViewById(R.id.comment_image)
+        val commentLinear: LinearLayout = view.findViewById(R.id.commentLinear)
         val heartImage: ImageView = view.findViewById(R.id.heart_image)
+        val heartLinear :LinearLayout = view.findViewById(R.id.heartLinear)
     }
 
     interface OnItemClickListener {
         fun onItemClick(item: Int,id :String)
+        fun onClick(item :IdeaData)
     }
 
 }
